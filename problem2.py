@@ -44,7 +44,7 @@ myVariable = 0
 def when_started1():
     global myVariable
     pass
-
+#led_c is yellow and led_e is green
 when_started1()
 while True:
     if bumper_a.pressing() and bumper_b.pressing():
