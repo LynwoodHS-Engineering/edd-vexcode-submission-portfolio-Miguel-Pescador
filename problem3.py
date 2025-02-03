@@ -49,18 +49,21 @@ def set_home_position():
     SLIDER.set_position(0, DEGREES)
 
 def open_claw():
-    CLAW.spin_for(FORWARD, 90, DEGREES)
+    CLAW.spin_for(FORWARD, 100, DEGREES)
+    wait(2,SECONDS)
 
 def close_claw():
-    CLAW.spin_for(REVERSE, 90, DEGREES)
+    CLAW.spin_for(REVERSE, 150, DEGREES)
 
 def move_slider_backward():
-    SLIDER.spin_for(REVERSE, 2160, DEGREES)
-    wait(4, SECONDS)
+    SLIDER.spin_for(REVERSE, 1850, DEGREES)
+    wait(3, SECONDS)
     SLIDER.stop()
 
 def set_main_position():
-    SLIDER.set_position(1080, DEGREES)
+    SLIDER.spin_for(FORWARD,1850, DEGREES)
+    wait(4, SECONDS)
+    SLIDER.stop()
 
 def return_to_home():
     SLIDER.set_position(0, DEGREES)
@@ -71,10 +74,9 @@ def grab_and_deposit():
     close_claw()
     move_slider_backward()
     open_claw()
+    set_main_position()
 
 def main():
     set_home_position()
     grab_and_deposit()
-    set_main_position()
-    open_claw()
-    return_to_home()
+main()
