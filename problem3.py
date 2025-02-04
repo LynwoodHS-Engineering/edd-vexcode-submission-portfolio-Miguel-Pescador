@@ -8,6 +8,7 @@ brain=Brain()
 # Robot configuration code
 SLIDER = Motor(Ports.PORT1, GearSetting.RATIO_18_1, False)
 CLAW = Motor(Ports.PORT2, GearSetting.RATIO_18_1, False)
+bumper_h = Bumper(brain.three_wire_port.h)
 
 
 # wait for rotation sensor to fully initialize
@@ -49,11 +50,11 @@ def set_home_position():
     SLIDER.set_position(0, DEGREES)
 
 def open_claw():
-    CLAW.spin_for(FORWARD, 100, DEGREES)
+    CLAW.spin_for(FORWARD, 90, DEGREES)
     wait(2,SECONDS)
 
 def close_claw():
-    CLAW.spin_for(REVERSE, 150, DEGREES)
+    CLAW.spin_for(REVERSE, 170, DEGREES)
 
 def move_slider_backward():
     SLIDER.spin_for(REVERSE, 1850, DEGREES)
@@ -77,6 +78,9 @@ def grab_and_deposit():
     set_main_position()
 
 def main():
-    set_home_position()
-    grab_and_deposit()
+    
+    while True:
+        if bumper_h.pressing(): 
+            grab_and_deposit() 
+            wait(2, SECONDS)  
 main()
